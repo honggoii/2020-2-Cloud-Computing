@@ -1,10 +1,10 @@
 # :seedling: 2020-2-Cloud-Computing
 Cloud Computing Term Project      
 2016039028 Hyunkyeong-Lee at Chungbuk National University
-
+-----------
 # :bulb: Overview
 > ### Dynamic Virtual Resource Managment Program
-
+-----------------
 # :octocat: Function
 * [1] list instance              
 * [2] available zones                  
