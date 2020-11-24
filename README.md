@@ -1,4 +1,6 @@
-# 2020-2-Cloud-Computing
+ 
+:bulb: 
+# :seedling: 2020-2-Cloud-Computing
 Cloud Computing Term Project      
 :octocat: 2016039028 Hyunkyeong-Lee at Chungbuk National University
 
