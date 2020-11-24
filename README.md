@@ -1,5 +1,5 @@
 # :seedling: 2020-2-Cloud-Computing
-<font color= "">Cloud Computing Term Project      
+<span style="color:black">Cloud Computing Term Project      
 2016039028 Hyunkyeong-Lee at Chungbuk National University
 
 # :bulb: Overview
