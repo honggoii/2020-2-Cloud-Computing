@@ -6,7 +6,8 @@ Cloud Computing Term Project
 > ##### Dynamic Virtual Resource Managment Program
 
 # Function
-1. list instance    
+1. list instance
+    list
 2. available zones
 3. start instance
 4. available regions
