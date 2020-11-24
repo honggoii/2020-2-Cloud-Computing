@@ -5,7 +5,7 @@ Cloud Computing Term Project
 # :bulb: Overview
 > ### Dynamic Virtual Resource Managment Program
 
-#   :octocat: :bulb:Function
+#:octocat:Function
 * [1] list instance              
 * [2] available zones                  
 * [3] start instance
