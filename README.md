@@ -3,7 +3,7 @@ Cloud Computing Term Project
 :octocat: 2016039028 Hyunkyeong-Lee at Chungbuk National University
 
 # Overview
-> ##### Dynamic Virtual Resource Managment Program
+> ### Dynamic Virtual Resource Managment Program
 
 # Function
 * [1] list instance              
