@@ -7,8 +7,7 @@ Cloud Computing Term Project
 
 # Function
 1. list instance              
-list
-2. available zones
+2. available zones                  
 3. start instance
 4. available regions
 5. stop instance
