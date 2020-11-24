@@ -73,7 +73,7 @@ public class awsTest {
 		Scanner id_string = new Scanner(System.in);
 		int number = 0;
 		
-		boolean flag = true;
+		boolean flag = true; // while escape flag
 		
 		while(flag)
 		{
@@ -144,11 +144,12 @@ public class awsTest {
 		System.out.println("Listing instances....");
 		boolean done = false;
 		
-		DescribeInstancesRequest request = new DescribeInstancesRequest();
+		DescribeInstancesRequest request = new DescribeInstancesRequest(); // Create object
 		
 		while(!done) {
-			DescribeInstancesResult response = ec2.describeInstances(request);
+			DescribeInstancesResult response = ec2.describeInstances(request); // Data returned for the request
 			
+			// instance print
 			for(Reservation reservation : response.getReservations()) {
 				for(Instance instance : reservation.getInstances()) {
 					System.out.printf(
@@ -168,8 +169,8 @@ public class awsTest {
 			
 			request.setNextToken(response.getNextToken());
 			
-			if(response.getNextToken() == null) {
-				done = true;
+			if(response.getNextToken() == null) { // do not have the next instance
+				done = true; // function break
 			}
 		}
 	}
@@ -178,8 +179,9 @@ public class awsTest {
 	public static void availableZones()	{
 		System.out.println("Avaliable Zones ... ");
 		
-		DescribeAvailabilityZonesResult response = ec2.describeAvailabilityZones();
+		DescribeAvailabilityZonesResult response = ec2.describeAvailabilityZones(); // Data returned for the request
 		
+		// as many instances
 		for(AvailabilityZone zone : response.getAvailabilityZones()) {
 			System.out.printf(
 					"Found Availability Zone %s " +
@@ -198,12 +200,12 @@ public class awsTest {
 		System.out.println("Enter instance id: ");
 		
 		Scanner sc = new Scanner(System.in);
-		String instanceId = sc.nextLine(); //instance id
+		String instanceId = sc.nextLine(); // input instance id
 			
-		StartInstancesRequest request = new StartInstancesRequest();
-		request.withInstanceIds(instanceId);
+		StartInstancesRequest request = new StartInstancesRequest(); // Create object
+		request.withInstanceIds(instanceId); // To the instance id entered
 		
-		ec2.startInstances(request);
+		ec2.startInstances(request); // Start Instance
 				
 		System.out.printf("Starting .... %s\n", instanceId);
 		System.out.printf("Successfully started instance %s", instanceId);
@@ -214,14 +216,16 @@ public class awsTest {
 	public static void availableRegions()	{
 		System.out.println("Avaliable Regiones ... ");
 		
-		DescribeRegionsResult response = ec2.describeRegions();
+		DescribeRegionsResult response = ec2.describeRegions(); // Data returned for the request
 		
+		// as many available regions
 		for(Region region : response.getRegions()) {
 			System.out.printf(
 					"Found Regions %s " + 
 					"with endpoint %s",
 					region.getRegionName(),
 					region.getEndpoint());
+			System.out.println();
 		}
 	}
 	
@@ -231,12 +235,12 @@ public class awsTest {
 		System.out.println("Enter instance id: ");
 		
 		Scanner sc = new Scanner(System.in);
-		String instanceId = sc.nextLine(); //instance id
+		String instanceId = sc.nextLine(); // input instance id
 		
-		StopInstancesRequest request = new StopInstancesRequest();
-		request.withInstanceIds(instanceId);
+		StopInstancesRequest request = new StopInstancesRequest(); // Create object
+		request.withInstanceIds(instanceId); // To the instance id entered
 
-		ec2.stopInstances(request);
+		ec2.stopInstances(request); // Stop Instance
 
 		System.out.printf("Successfully stop instance %s", instanceId);
 	}
@@ -247,19 +251,19 @@ public class awsTest {
 		System.out.println("Enter ami id: ");
 		
 		Scanner sc = new Scanner(System.in);
-		String amiId = sc.nextLine();//ami id
+		String amiId = sc.nextLine();// input ami id
 		
 		try {
-			RunInstancesRequest request = new RunInstancesRequest();
-			request.withImageId(amiId);
-			request.withInstanceType(InstanceType.T2Micro);
-			request.withMaxCount(1);
-			request.withMinCount(1);
-			request.withKeyName("awscloud");
-			request.withSecurityGroupIds("htcondor-security");
+			RunInstancesRequest request = new RunInstancesRequest(); // Create object
+			request.withImageId(amiId); // To the ami id entered
+			request.withInstanceType(InstanceType.T2Micro); // To the T2Micro instanceType
+			request.withMaxCount(1); // The maxmum number of instances to launch
+			request.withMinCount(1); // The minimum number of instances to launch
+			request.withKeyName("awscloud"); // To the "awsCloud" key pair
+			request.withSecurityGroupIds("htcondor-security"); // To the "htcondor-security" security group ids
 
-			RunInstancesResult response = ec2.runInstances(request);
-			String instanceId = response.getReservation().getInstances().get(0).getInstanceId();
+			RunInstancesResult response = ec2.runInstances(request); // Data returned for the request
+			String instanceId = response.getReservation().getInstances().get(0).getInstanceId(); // Generated instance id
 			
 			System.out.printf(
 					"Successfully started EC2 Instances %s based on AMI %s",
@@ -277,14 +281,14 @@ public class awsTest {
 		System.out.println("Enter instance id: ");
 		
 		Scanner sc = new Scanner(System.in);
-		String instanceId = sc.nextLine(); //instance id
+		String instanceId = sc.nextLine(); // input instance id
 		
 		try {
 			System.out.printf("Rebooting .... %s\n", instanceId);
-			RebootInstancesRequest request = new RebootInstancesRequest();
-			request.withInstanceIds(instanceId);
+			RebootInstancesRequest request = new RebootInstancesRequest(); // Create object
+			request.withInstanceIds(instanceId); // To the instance id entered
 			
-			ec2.rebootInstances(request);
+			ec2.rebootInstances(request); // Reboot Instance
 			System.out.printf("Successfully rebooted instance %s", instanceId);
 		} catch (Exception e) {
 			throw new AmazonClientException("Unsuccessfully rebooted instance");
@@ -294,12 +298,14 @@ public class awsTest {
 	//case 8. list images
 	public static void listImages()	{
 		System.out.println("Listing images....");
-		String owner = "664259704595"; 
+		String owner = "664259704595"; // To prevent duplication
 		
-		DescribeImagesRequest request = new DescribeImagesRequest().withOwners(owner);
+		DescribeImagesRequest request = new DescribeImagesRequest(); // Create object
+		request.withOwners(owner); // To the owner
 		
-		Collection<Image> response = ec2.describeImages(request).getImages();
+		Collection<Image> response = ec2.describeImages(request).getImages(); // Data returned for the request
 
+		// as many images
 		for(Image image : response) {
 			System.out.printf(
 					"[ImageID] %s, " +
@@ -318,12 +324,12 @@ public class awsTest {
 		System.out.println("Enter instance id: ");
 		
 		Scanner sc = new Scanner(System.in);
-		String instanceId = sc.nextLine(); //instance id
+		String instanceId = sc.nextLine(); // input instance id
 		
-		TerminateInstancesRequest request = new TerminateInstancesRequest();
-		request.withInstanceIds(instanceId);
+		TerminateInstancesRequest request = new TerminateInstancesRequest(); // Create object
+		request.withInstanceIds(instanceId); // To the instance id entered 
 		
-		ec2.terminateInstances(request);
+		ec2.terminateInstances(request); // Terminate instance
 		System.out.printf("Successfully terminate instance %s", instanceId);
 	}
 }
